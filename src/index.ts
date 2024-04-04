@@ -41,14 +41,3 @@ export const flashMessage = (
 ) => {
   writeFlash(cookie, FLASH_MESSAGE, { value, type })
 }
-
-export type FlashContextStore = {
-  value?: string
-  type?: MessageVariant
-}
-export const FlashContext = createContextId<FlashContextStore>("FLASH_PROVIDER")
-
-export const useFlashProvider = (store: FlashContextStore) =>
-  useContextProvider(FlashContext, store)
-
-export const useFlashContext = () => useContext(FlashContext)
