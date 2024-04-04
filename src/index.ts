@@ -51,4 +51,4 @@ export const FlashContext = createContextId<FlashContextStore>("FLASH_PROVIDER")
 export const useFlashProvider = (store: FlashContextStore) =>
   useContextProvider(FlashContext, store)
 
-export const useFlashContext = useContext(FlashContext)
+export const useFlashContext = () => useContext(FlashContext)
