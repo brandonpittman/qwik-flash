@@ -40,7 +40,9 @@ export const flashMessage = (
 }
 
 export const useFlashMessage = (
-  useLoader: Loader<{ flashMessageValue: { value: string; type: string } }>,
+  useLoader: Loader<{
+    flashMessageValue: { value: string; type: MessageVariant }
+  }>,
 ) => {
   const data = useLoader()
 
