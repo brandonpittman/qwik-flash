@@ -1,6 +1,6 @@
 {
   "name": "qwik-flash",
-  "version": "0.0.5",
+  "version": "0.0.6-0",
   "description": "Flash helpers for Qwik",
   "publishConfig": {
     "access": "public"
