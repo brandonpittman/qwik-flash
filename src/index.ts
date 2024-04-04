@@ -1,9 +1,6 @@
-import {
-  createContextId,
-  useContext,
-  useContextProvider,
-} from "@builder.io/qwik"
-import type { Cookie } from "@builder.io/qwik-city"
+import { useVisibleTask$ } from "@builder.io/qwik"
+import type { Cookie, Loader } from "@builder.io/qwik-city"
+import { toast } from "qwik-sonner"
 
 const FLASH_MESSAGE = "flash-message"
 const flash = (name: string) => `__${name}__`
@@ -40,4 +37,32 @@ export const flashMessage = (
   type?: MessageVariant,
 ) => {
   writeFlash(cookie, FLASH_MESSAGE, { value, type })
+}
+
+export const useFlashMessage = (
+  useLoader: Loader<{
+    flashMessageValue?: { value: string; type: MessageVariant }
+  }>,
+) => {
+  const data = useLoader()
+
+  // eslint-disable-next-line
+  useVisibleTask$(({ track }) => {
+    track(() => data.value.flashMessageValue?.value)
+
+    if (data.value.flashMessageValue?.value)
+      switch (data.value.flashMessageValue.type) {
+        case "info":
+          toast.info(data.value.flashMessageValue.value)
+          break
+        case "error":
+          toast.error(data.value.flashMessageValue.value)
+          break
+        case "success":
+          toast.success(data.value.flashMessageValue.value)
+          break
+        default:
+          toast(data.value.flashMessageValue.value)
+      }
+  })
 }
